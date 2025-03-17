@@ -17,8 +17,13 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
+//repositories {
+    //mavenLocal()
+//}
+
 repositories {
-    mavenLocal()
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+    maven { url = "https://maven.createmod.net" }
 }
 
 base {
@@ -133,6 +138,8 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+ implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -149,7 +156,9 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            mod_description        : mod_description
+            mod_description        : mod_description,
+            ponder_version        : ponder_version
+
     ]
     inputs.properties replaceProperties
     expand replaceProperties
